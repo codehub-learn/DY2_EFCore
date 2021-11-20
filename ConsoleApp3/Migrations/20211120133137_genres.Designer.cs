@@ -4,6 +4,7 @@ using ConsoleApp3;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleApp3.Migrations
 {
     [DbContext(typeof(BooksContext))]
-    partial class BooksContextModelSnapshot : ModelSnapshot
+    [Migration("20211120133137_genres")]
+    partial class genres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,26 +58,6 @@ namespace ConsoleApp3.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("ConsoleApp3.AuthorPublisher", b =>
-                {
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PublisherPublisherKey")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 11, 20, 14, 55, 44, 70, DateTimeKind.Utc).AddTicks(412));
-
-                    b.HasKey("AuthorId", "PublisherPublisherKey");
-
-                    b.HasIndex("PublisherPublisherKey");
-
-                    b.ToTable("AuthorPublisher");
                 });
 
             modelBuilder.Entity("ConsoleApp3.Book", b =>
@@ -126,27 +108,6 @@ namespace ConsoleApp3.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("ConsoleApp3.Publisher", b =>
-                {
-                    b.Property<int>("PublisherKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PublisherKey"), 1L, 1);
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PublisherKey");
-
-                    b.ToTable("Publishers");
-                });
-
             modelBuilder.Entity("ConsoleApp3.Synopsis", b =>
                 {
                     b.Property<long>("Id")
@@ -185,21 +146,6 @@ namespace ConsoleApp3.Migrations
                     b.HasOne("ConsoleApp3.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ConsoleApp3.AuthorPublisher", b =>
-                {
-                    b.HasOne("ConsoleApp3.Author", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ConsoleApp3.Publisher", null)
-                        .WithMany()
-                        .HasForeignKey("PublisherPublisherKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -12,5 +12,6 @@ namespace ConsoleApp3
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public List<Book> AuthoredBooks { get; set; } = new();
+        public List<Publisher> Publishers { get; set; }
     }
 }

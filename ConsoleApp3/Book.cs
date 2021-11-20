@@ -16,5 +16,6 @@ namespace ConsoleApp3
         public int AuthorId { get; set; }
         public Author Author { get; set; }
         public Synopsis? Synopsis { get; set; }
+        public List<Genre> Genres { get; set; } = new();
     }
 }
