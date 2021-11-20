@@ -15,5 +15,6 @@ namespace ConsoleApp3
         public int? Pages { get; set; } 
         public int AuthorId { get; set; }
         public Author Author { get; set; }
+        public Synopsis? Synopsis { get; set; }
     }
 }
